@@ -1,12 +1,13 @@
+language: generic
 sudo: required
 services:
   - docker
 
 before_install:
-  - docker build -t avinashatpb/docker-react -f Dockerfile.dev
+  - docker build -t avinashatpb/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run avinashatpb/docker-react npm run test -- --coverage
+  - docker run -e CI=true avinashatpb/docker-react npm run test -- --coverage
 
 deploy:
   provider: elasticbeanstalk
